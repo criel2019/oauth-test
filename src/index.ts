@@ -153,7 +153,7 @@ passport.use(new GitHubStrategy({
 app.get('/auth/google', passport.authenticate('google', { scope: ['profile'] }));
 
 app.get('/auth/google/callback',
-  passport.authenticate('google', { failureRedirect: 'http://localhost:3000', session: true }),
+  passport.authenticate('google', { failureRedirect: 'http://localhost:3001', session: true }),
   function (req, res) {
     res.redirect('http://localhost:3000');
   });
@@ -162,7 +162,7 @@ app.get('/auth/google/callback',
 app.get('/auth/twitter', passport.authenticate('twitter'));
 
 app.get('/auth/twitter/callback',
-  passport.authenticate('twitter', { failureRedirect: 'http://localhost:3000', session: true }),
+  passport.authenticate('twitter', { failureRedirect: 'http://localhost:3001', session: true }),
   function (req, res) {
     res.redirect('http://localhost:3000');
   });
@@ -171,7 +171,7 @@ app.get('/auth/twitter/callback',
 app.get('/auth/github', passport.authenticate('github'));
 
 app.get('/auth/github/callback',
-  passport.authenticate('github', { failureRedirect: 'http://localhost:3000', session: true }),
+  passport.authenticate('github', { failureRedirect: 'http://localhost:3001', session: true }),
   function (req, res) {
     res.redirect('http://localhost:3000');
   });
