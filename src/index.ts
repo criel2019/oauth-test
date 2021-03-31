@@ -44,9 +44,10 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-  passport.serializeUser((user, done) => { // Strategy 성공 시 호출됨
-    done(null, user); // 여기의 user가 deserializeUser의 첫 번째 매개변수로 이동
-  });
+
+passport.serializeUser((user: IMongoDBUser, done: any) => {
+  return done(null, user._id);
+});
 
 passport.deserializeUser((id: string, done: any) => {
 
