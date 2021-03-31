@@ -24,7 +24,7 @@ mongoose.connect(`${process.env.START_MONGODB}${process.env.MONGODB_USERNAME}:${
 
 // Middleware
 app.use(express.json());
-app.use(cors({ origin: "http://localhost:4000", credentials: true }))
+app.use(cors({ origin: "http://localhost:3000", credentials: true }))
 
 app.set("trust proxy", 1);
 
@@ -61,7 +61,7 @@ passport.deserializeUser((id: string, done: any) => {
 passport.use(new GoogleStrategy({
   clientID: `${process.env.GOOGLE_CLIENT_ID}`,
   clientSecret: `${process.env.GOOGLE_CLIENT_SECRET}`,
-  callbackURL: "/auth/google/callback"
+  callbackURL: "http://localhost:3000/auth/google/callback"
 },
   function (_: any, __: any, profile: any, cb: any) {
 
@@ -153,27 +153,27 @@ passport.use(new GitHubStrategy({
 app.get('/auth/google', passport.authenticate('google', { scope: ['profile'] }));
 
 app.get('/auth/google/callback',
-  passport.authenticate('google', { failureRedirect: 'http://localhost:4000', session: true }),
+  passport.authenticate('google', { failureRedirect: 'http://localhost:3000', session: true }),
   function (req, res) {
-    res.redirect('http://localhost:4000');
+    res.redirect('http://localhost:3000');
   });
 
 
 app.get('/auth/twitter', passport.authenticate('twitter'));
 
 app.get('/auth/twitter/callback',
-  passport.authenticate('twitter', { failureRedirect: 'http://localhost:4000', session: true }),
+  passport.authenticate('twitter', { failureRedirect: 'http://localhost:3000', session: true }),
   function (req, res) {
-    res.redirect('http://localhost:4000');
+    res.redirect('http://localhost:3000');
   });
 
 
 app.get('/auth/github', passport.authenticate('github'));
 
 app.get('/auth/github/callback',
-  passport.authenticate('github', { failureRedirect: 'http://localhost:4000', session: true }),
+  passport.authenticate('github', { failureRedirect: 'http://localhost:3000', session: true }),
   function (req, res) {
-    res.redirect('http://localhost:4000');
+    res.redirect('http://localhost:3000');
   });
 
 
@@ -193,6 +193,6 @@ app.get("/auth/logout", (req, res) => {
   }
 })
 
-app.listen(process.env.PORT || 4000, () => {
+app.listen(process.env.PORT || 3000, () => {
   console.log("Server Starrted");
 })
