@@ -49,13 +49,13 @@ passport.serializeUser((user: IMongoDBUser, done: any) => {
   return done(null, user._id);
 });
 
-passport.deserializeUser((id, done)=>{
-  passport.deserializeUser((id, done) => {
-    User.findById(id).then((user) => {
-      done(null, user);
-    }).catch(done);
-  });
-});
+passport.deserializeUser((id: string, done: any) => {
+
+  User.findById(id, (err: Error, doc: IMongoDBUser) => {
+    // Whatever we return goes to the client and binds to the req.user property
+    return done(null, doc);
+  })
+})
 
 
 passport.use(new GoogleStrategy({
