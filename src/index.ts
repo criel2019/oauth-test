@@ -181,7 +181,7 @@ app.get("/", (req, res) => {
   res.send("Helllo WOlrd");
 })
 
-app.post("/getuser", (req, res) => {
+app.get("/getuser", (req, res) => {
   res.send(req.user);
 })
 
