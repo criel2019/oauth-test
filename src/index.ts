@@ -78,7 +78,7 @@ passport.use(new GoogleStrategy({
 
         await newUser.save();
         cb(null, newUser);
-      }
+      }else
       cb(null, doc);
     })
 
@@ -139,7 +139,7 @@ passport.use(new GitHubStrategy({
 
         await newUser.save();
         cb(null, newUser);
-      }
+      }else
       cb(null, doc);
     })
 
