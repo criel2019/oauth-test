@@ -177,15 +177,15 @@ app.get('https://criel.herokuapp.com/auth/github/callback',
 
 
 
-app.get("https://criel.herokuapp.com", (req, res) => {
+app.get("/", (req, res) => {
   res.send("Helllo WOlrd");
 })
 
-app.get("https://criel.herokuapp.com/getuser", (req, res) => {
+app.get("/getuser", (req, res) => {
   res.send(req.user);
 })
 
-app.get("https://criel.herokuapp.com/auth/logout", (req, res) => {
+app.get("/auth/logout", (req, res) => {
   if (req.user) {
     req.logout();
     res.send("done");
