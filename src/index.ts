@@ -149,27 +149,27 @@ passport.use(new GitHubStrategy({
 
 
 
-app.get('https://criel-test.herokuapp.com/auth/google', passport.authenticate('google', { scope: ['profile'] }));
+app.get('https://criel.herokuapp.com/auth/google', passport.authenticate('google', { scope: ['profile'] }));
 
-app.get('https://criel-test.herokuapp.com/auth/google/callback',
+app.get('https://criel.herokuapp.com/auth/google/callback',
   passport.authenticate('google', { failureRedirect: 'https://criel-test.herokuapp.com', session: true }),
   function (req, res) {
     res.redirect('https://criel-test.herokuapp.com');
   });
 
 
-app.get('https://criel-test.herokuapp.com/auth/twitter', passport.authenticate('twitter'));
+app.get('https://criel.herokuapp.com/auth/twitter', passport.authenticate('twitter'));
 
-app.get('https://criel-test.herokuapp.com/auth/twitter/callback',
+app.get('https://criel.herokuapp.com/auth/twitter/callback',
   passport.authenticate('twitter', { failureRedirect: 'https://criel-test.herokuapp.com', session: true }),
   function (req, res) {
     res.redirect('https://criel-test.herokuapp.com');
   });
 
 
-app.get('https://criel-test.herokuapp.com/auth/github', passport.authenticate('github'));
+app.get('https://criel.herokuapp.com/auth/github', passport.authenticate('github'));
 
-app.get('https://criel-test.herokuapp.com/auth/github/callback',
+app.get('https://criel.herokuapp.com/auth/github/callback',
   passport.authenticate('github', { failureRedirect: 'https://criel-test.herokuapp.com', session: true }),
   function (req, res) {
     res.redirect('https://criel-test.herokuapp.com');
@@ -177,15 +177,15 @@ app.get('https://criel-test.herokuapp.com/auth/github/callback',
 
 
 
-app.get("https://criel-test.herokuapp.com", (req, res) => {
+app.get("https://criel.herokuapp.com", (req, res) => {
   res.send("Helllo WOlrd");
 })
 
-app.get("https://criel-test.herokuapp.com/getuser", (req, res) => {
+app.get("https://criel.herokuapp.com/getuser", (req, res) => {
   res.send(req.user);
 })
 
-app.get("https://criel-test.herokuapp.com/auth/logout", (req, res) => {
+app.get("https://criel.herokuapp.com/auth/logout", (req, res) => {
   if (req.user) {
     req.logout();
     res.send("done");
