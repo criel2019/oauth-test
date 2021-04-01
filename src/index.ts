@@ -24,7 +24,7 @@ mongoose.connect(`${process.env.START_MONGODB}${process.env.MONGODB_USERNAME}:${
 
 // Middleware changed 
 app.use(express.json());
-app.use(cors({ origin: "https://criel-test.herokuapp.com", credentials: true }))
+app.use(cors({ origin: "https://criel.herokuapp.com", credentials: true }))
 
 app.set("trust proxy", 1);
 
@@ -60,7 +60,7 @@ passport.deserializeUser((id: string, done: any) => {
 passport.use(new GoogleStrategy({
   clientID: `${process.env.GOOGLE_CLIENT_ID}`,
   clientSecret: `${process.env.GOOGLE_CLIENT_SECRET}`,
-  callbackURL: "https://criel-test.herokuapp.com/auth/google/callback"
+  callbackURL: "https://criel.herokuapp.com/auth/google/callback"
 },
   function (_: any, __: any, profile: any, cb: any) {
 
@@ -149,7 +149,7 @@ passport.use(new GitHubStrategy({
 
 
 
-app.get('https://criel-test.herokuapp.com/auth/google', passport.authenticate('google', { scope: ['profile'] }));
+app.get('/auth/google', passport.authenticate('google', { scope: ['profile'] }));
 
 app.get('/auth/google/callback',
   passport.authenticate('google', { failureRedirect: 'https://criel-test.herokuapp.com', session: true }),
