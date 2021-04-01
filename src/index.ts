@@ -60,7 +60,7 @@ passport.deserializeUser((id: string, done: any) => {
 passport.use(new GoogleStrategy({
   clientID: `${process.env.GOOGLE_CLIENT_ID}`,
   clientSecret: `${process.env.GOOGLE_CLIENT_SECRET}`,
-  callbackURL: "https://criel-test.herokuapp.com/auth/google/callback"
+  callbackURL: "/auth/google/callback"
 },
   function (_: any, __: any, profile: any, cb: any) {
 
@@ -178,7 +178,7 @@ app.get('/auth/github/callback',
 
 
 app.get("/", (req, res) => {
-  res.send("Helllo Wolrd");
+  res.send("Helllo WOlrd");
 })
 
 app.get("/getuser", (req, res) => {
@@ -192,6 +192,6 @@ app.get("/auth/logout", (req, res) => {
   }
 })
 
-app.listen(process.env.PORT || 3000, () => {
+app.listen(process.env.PORT || 4000, () => {
   console.log("Server Starrted");
 })
