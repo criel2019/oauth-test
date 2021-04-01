@@ -24,7 +24,7 @@ mongoose.connect(`${process.env.START_MONGODB}${process.env.MONGODB_USERNAME}:${
 
 // Middleware changed 
 app.use(express.json());
-app.use(cors({ origin: "https://criel.herokuapp.com", credentials: true }))
+app.use(cors({ origin: "https://criel-test.herokuapp.com", credentials: true }))
 
 app.set("trust proxy", 1);
 
@@ -152,27 +152,27 @@ passport.use(new GitHubStrategy({
 app.get('/auth/google', passport.authenticate('google', { scope: ['profile'] }));
 
 app.get('/auth/google/callback',
-  passport.authenticate('google', { failureRedirect: 'https://criel.herokuapp.com', session: true }),
+  passport.authenticate('google', { failureRedirect: 'https://criel-test.herokuapp.com', session: true }),
   function (req, res) {
-    res.redirect('https://criel.herokuapp.com');
+    res.redirect('https://criel-test.herokuapp.com');
   });
 
 
 app.get('/auth/twitter', passport.authenticate('twitter'));
 
 app.get('/auth/twitter/callback',
-  passport.authenticate('twitter', { failureRedirect: 'https://criel.herokuapp.com', session: true }),
+  passport.authenticate('twitter', { failureRedirect: 'https://criel-test.herokuapp.com', session: true }),
   function (req, res) {
-    res.redirect('https://criel.herokuapp.com');
+    res.redirect('https://criel-test.herokuapp.com');
   });
 
 
 app.get('/auth/github', passport.authenticate('github'));
 
 app.get('/auth/github/callback',
-  passport.authenticate('github', { failureRedirect: 'https://criel.herokuapp.com', session: true }),
+  passport.authenticate('github', { failureRedirect: 'https://criel-test.herokuapp.com', session: true }),
   function (req, res) {
-    res.redirect('https://criel.herokuapp.com');
+    res.redirect('https://criel-test.herokuapp.com');
   });
 
 
