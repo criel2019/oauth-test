@@ -24,6 +24,7 @@ mongoose.connect(`${process.env.START_MONGODB}${process.env.MONGODB_USERNAME}:${
 
 // Middleware changed 
 app.use(express.json());
+
 app.use(cors({ origin: "https://criel-test.herokuapp.com", credentials: true }))
 
 app.set("trust proxy", 1);
@@ -39,8 +40,7 @@ app.use(
       maxAge: 1000 * 60 * 60 * 24 * 7 // One Week
     }
   }))
-
-
+app.use(express.urlencoded( {extended : false } )); 
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -152,18 +152,18 @@ passport.use(new GitHubStrategy({
 app.get('/auth/google', passport.authenticate('google', { scope: ['profile'] }));
 
 app.get('/auth/google/callback',
-  passport.authenticate('google', { failureRedirect: 'https://criel.herokuapp.com', session: true }),
+  passport.authenticate('google', { failureRedirect: '/login', session: true }),
   function (req, res) {
-    res.redirect('https://criel.herokuapp.com');
+    res.redirect('/');
   });
 
 
 app.get('/auth/twitter', passport.authenticate('twitter'));
 
 app.get('/auth/twitter/callback',
-  passport.authenticate('twitter', { failureRedirect: 'https://criel-test.herokuapp.com', session: true }),
+  passport.authenticate('twitter', { failureRedirect: '/login', session: true }),
   function (req, res) {
-    res.redirect('https://criel-test.herokuapp.com');
+    res.redirect('/');
   });
 
 
@@ -181,7 +181,7 @@ app.get("/", (req, res) => {
   res.send("Helllo WOlrd");
 })
 
-app.get("/getuser", (req, res) => {
+app.post("/getuser", (req, res) => {
   res.send(req.user);
 })
 
