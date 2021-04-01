@@ -152,9 +152,9 @@ passport.use(new GitHubStrategy({
 app.get('/auth/google', passport.authenticate('google', { scope: ['profile'] }));
 
 app.get('/auth/google/callback',
-  passport.authenticate('google', { failureRedirect: 'https://criel-test.herokuapp.com', session: true }),
+  passport.authenticate('google', { failureRedirect: 'https://criel.herokuapp.com', session: true }),
   function (req, res) {
-    res.redirect('https://criel-test.herokuapp.com');
+    res.redirect('https://criel.herokuapp.com');
   });
 
 
