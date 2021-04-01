@@ -149,27 +149,27 @@ passport.use(new GitHubStrategy({
 
 
 
-app.get('https://criel.herokuapp.com/auth/google', passport.authenticate('google', { scope: ['profile'] }));
+app.get('/auth/google', passport.authenticate('google', { scope: ['profile'] }));
 
-app.get('https://criel.herokuapp.com/auth/google/callback',
+app.get('/auth/google/callback',
   passport.authenticate('google', { failureRedirect: 'https://criel-test.herokuapp.com', session: true }),
   function (req, res) {
     res.redirect('https://criel-test.herokuapp.com');
   });
 
 
-app.get('https://criel.herokuapp.com/auth/twitter', passport.authenticate('twitter'));
+app.get('/auth/twitter', passport.authenticate('twitter'));
 
-app.get('https://criel.herokuapp.com/auth/twitter/callback',
+app.get('/auth/twitter/callback',
   passport.authenticate('twitter', { failureRedirect: 'https://criel-test.herokuapp.com', session: true }),
   function (req, res) {
     res.redirect('https://criel-test.herokuapp.com');
   });
 
 
-app.get('https://criel.herokuapp.com/auth/github', passport.authenticate('github'));
+app.get('/auth/github', passport.authenticate('github'));
 
-app.get('https://criel.herokuapp.com/auth/github/callback',
+app.get('/auth/github/callback',
   passport.authenticate('github', { failureRedirect: 'https://criel-test.herokuapp.com', session: true }),
   function (req, res) {
     res.redirect('https://criel-test.herokuapp.com');
