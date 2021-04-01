@@ -78,11 +78,11 @@ passport.use(new GoogleStrategy({
 
         await newUser.save();
         cb(null, newUser);
-        console.log("noice")
-      }else{
-        cb(null, doc);
-        console.log("something happened")
+
       }
+        cb(null, doc);
+
+      
      
     })
 
@@ -111,7 +111,7 @@ passport.use(new TwitterStrategy({
 
         await newUser.save();
         cb(null, newUser);
-      }else
+      }
       cb(null, doc);
     })
 
@@ -143,7 +143,7 @@ passport.use(new GitHubStrategy({
 
         await newUser.save();
         cb(null, newUser);
-      }else
+      }
       cb(null, doc);
     })
 
