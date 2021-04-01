@@ -107,7 +107,7 @@ passport.use(new TwitterStrategy({
 
         await newUser.save();
         cb(null, newUser);
-      }
+      }else
       cb(null, doc);
     })
 
