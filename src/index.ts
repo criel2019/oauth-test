@@ -156,7 +156,7 @@ passport.use(new GitHubStrategy({
 app.get('/auth/google', passport.authenticate('google', { scope: ['profile'] }));
 
 app.get('/auth/google/callback',
-  passport.authenticate('google', { failureRedirect: 'https://6065a02c87bc47f3ddd64b74--awesome-goldberg-60d50e.netlify.app', session: true }),
+  passport.authenticate('google', { failureRedirect: '/login', session: true }),
   function (req, res) {
     res.redirect('https://6065a02c87bc47f3ddd64b74--awesome-goldberg-60d50e.netlify.app');
   });
@@ -165,7 +165,7 @@ app.get('/auth/google/callback',
 app.get('/auth/twitter', passport.authenticate('twitter'));
 
 app.get('/auth/twitter/callback',
-  passport.authenticate('twitter', { failureRedirect: 'https://6065a02c87bc47f3ddd64b74--awesome-goldberg-60d50e.netlify.app', session: true }),
+  passport.authenticate('twitter', { failureRedirect: '/login', session: true }),
   function (req, res) {
     res.redirect('https://6065a02c87bc47f3ddd64b74--awesome-goldberg-60d50e.netlify.app');
   });
@@ -174,7 +174,7 @@ app.get('/auth/twitter/callback',
 app.get('/auth/github', passport.authenticate('github'));
 
 app.get('/auth/github/callback',
-  passport.authenticate('github', { failureRedirect: 'https://6065a02c87bc47f3ddd64b74--awesome-goldberg-60d50e.netlify.app', session: true }),
+  passport.authenticate('github', { failureRedirect: '/login', session: true }),
   function (req, res) {
     res.redirect('https://6065a02c87bc47f3ddd64b74--awesome-goldberg-60d50e.netlify.app');
   });
