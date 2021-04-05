@@ -1,26 +1,31 @@
-import express from 'express';
-import mongoose, { Error } from 'mongoose';
-import dotenv from "dotenv";
-import cors from 'cors';
+import express from 'express'
+import cors from "cors"
+import mongoose from "mongoose"
+import config from './config/config'
 import session from 'express-session';
 import passport from 'passport';
-import User from './User';
-import { IMongoDBUser } from './types'
+import User from './models/user';
+import { IMongoDBUser } from './interfaces/user'
+import userRoutes from './routes/user'
+
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
-const TwitterStrategy = require('passport-twitter').Strategy;
+const NaverStrategy = require('passport-naver').Strategy;
 const GitHubStrategy = require('passport-github').Strategy;
 
 
-dotenv.config();
-
-const app = express();
-
-mongoose.connect(`${process.env.START_MONGODB}${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}${process.env.END_MONGODB}`, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-}, () => {
-  console.log("Connected to mongoose successfully")
+const app = express()
+app.use(express.json())
+mongoose
+.connect(config.mongo.url, config.mongo.options)
+.then((result) => {
+       console.log('connected')
+})
+.catch((error) => {
+       console.log(error.message)
 });
+
+
+
 
 // Middleware changed 
 app.use(express.json());
@@ -28,6 +33,8 @@ app.use(express.json());
 app.use(cors({ origin: "https://6065a02c87bc47f3ddd64b74--awesome-goldberg-60d50e.netlify.app", credentials: true }))
 
 app.set("trust proxy", 1);
+
+
 
 app.use(
   session({
@@ -40,7 +47,7 @@ app.use(
       maxAge: 1000 * 60 * 60 * 24 * 7 // One Week
     }
   }))
-app.use(express.urlencoded( {extended : false } )); 
+app.use(express.urlencoded({ extended: false }));
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -58,8 +65,8 @@ passport.deserializeUser((id: string, done: any) => {
 })
 
 passport.use(new GoogleStrategy({
-  clientID: `${process.env.GOOGLE_CLIENT_ID}`,
-  clientSecret: `${process.env.GOOGLE_CLIENT_SECRET}`,
+  clientID: `465479427588-fkdiup6o5ank9ukab68j14vqhdjsff03.apps.googleusercontent.com`,
+  clientSecret: `6AJL4-WxZdGzD30Ec-uKhsqf`,
   callbackURL: "/auth/google/callback"
 },
   function (_: any, __: any, profile: any, cb: any) {
@@ -80,24 +87,24 @@ passport.use(new GoogleStrategy({
         cb(null, newUser);
 
       }
-        cb(null, doc);
+      cb(null, doc);
 
-      
-     
+
+
     })
 
   }));
 
 
 
-passport.use(new TwitterStrategy({
-  consumerKey: `${process.env.TWITTER_CLIENT_ID}`,
-  consumerSecret: `${process.env.TWITTER_CLIENT_SECRET}`,
-  callbackURL: "/auth/twitter/callback"
+passport.use(new NaverStrategy({
+  consumerKey: `xeiJ4Etz63ZzWGd_3ODf`,
+  consumerSecret: `i25diPbhrQ`,
+  callbackURL: "/auth/naver/callback"
 },
   function (_: any, __: any, profile: any, cb: any) {
 
-    User.findOne({ twitterId: profile.id }, async (err: Error, doc: IMongoDBUser) => {
+    User.findOne({ naverId: profile.id }, async (err: Error, doc: IMongoDBUser) => {
 
       if (err) {
         return cb(err, null);
@@ -105,7 +112,7 @@ passport.use(new TwitterStrategy({
 
       if (!doc) {
         const newUser = new User({
-          twitterId: profile.id,
+          naverId: profile.id,
           username: profile.username
         });
 
@@ -153,49 +160,24 @@ passport.use(new GitHubStrategy({
 
 
 
-app.get('/auth/google', passport.authenticate('google', { scope: ['profile'] }));
-
-app.get('/auth/google/callback',
-  passport.authenticate('google', { failureRedirect: '/login', session: true }),
-  function (req, res) {
-    res.redirect('https://6065a02c87bc47f3ddd64b74--awesome-goldberg-60d50e.netlify.app');
-  });
 
 
-app.get('/auth/twitter', passport.authenticate('twitter'));
-
-app.get('/auth/twitter/callback',
-  passport.authenticate('twitter', { failureRedirect: '/login', session: true }),
-  function (req, res) {
-    res.redirect('https://6065a02c87bc47f3ddd64b74--awesome-goldberg-60d50e.netlify.app');
-  });
-
-
-app.get('/auth/github', passport.authenticate('github'));
-
-app.get('/auth/github/callback',
-  passport.authenticate('github', { failureRedirect: '/login', session: true }),
-  function (req, res) {
-    res.redirect('https://6065a02c87bc47f3ddd64b74--awesome-goldberg-60d50e.netlify.app');
-  });
-
-
-
-app.get("/", (req, res) => {
-  res.send("Helllo WOlrd");
+app.use(cors())
+app.get("/", (req : express.Request , res : express.Response, next : express.NextFunction) => {
+    res.send("hello")
 })
 
-app.get("/getuser", (req, res) => {
-  res.send(req.user);
-})
 
-app.get("/auth/logout", (req, res) => {
-  if (req.user) {
-    req.logout();
-    res.send("done");
-  }
-})
+app.use((req : express.Request , res : express.Response, next : express.NextFunction) => {
+       const error = new Error('Not Found');
+       res.status(404).json({
+              message : error.message
+       });
+});
 
-app.listen(process.env.PORT || 4000, () => {
-  console.log("Server Starrted");
-})
+
+app.use('/user', userRoutes);
+
+
+const port = process.env.PORT || 8081
+app.listen(port,()=>console.log("start"+port))

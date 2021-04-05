@@ -1,34 +1,57 @@
-# OAuth Video -> The Repository for the Backend of the OAuth2.0 Project Video
+# 👋**Backend**
 
-## Introduction
+Typescript+Mongoose로 만들어보는 쇼핑몰 페이지(크몽 참고)
 
-Development Branch -> For coding locally (start by running "yarn run dev")
-Main Branch -> For production builds and deploying (start by running "yarn build" then "yarn start")
+게시판 API, 결제  API(BootPay), 로그인 API, Heroku, Mongodb
 
-This is the Github Repo for the code built inside of the passport OAuth2.0 youtube video I made..
-The video can be found here: https://www.youtube.com/watch?v=cD17CYA1dck&ab_channel=NathanielWoodbury
+## 👉**Getting Started**
 
-This code is ready to be deployed to Heroku (it is production ready on the main branch)
+- 실행
 
-Dependency list and explanation for each item -> https://github.com/woodburydev/oauth-video/blob/main/notes.txt
+```bash
+npm start
+```
 
-When deploying this code ensure that you fill out the ENVIORNMENT variables when deploying, so that the application runs.
+- 터미널 화면
 
-Ensure *ALL* Auth providers match your respective backend endpoints:
+```bash
+start5000
+(node:18864) DeprecationWarning: Listening to events on the Db class has been deprecated and will be removed in the next major version.
+connected
+```
 
-* Google -> https://console.developers.google.com/apis/dashboard
-* Twitter -> https://developer.twitter.com/en/portal/dashboard
-* Github -> https://github.com/settings/developers
+로그 설명
+start{port} → localhost에 연결됨
+listen이라는 코드를 쓰는 것을 추천 안함 → 에러 아니니 걱정 No! → 무시
+mongoose연결되었다는 의미
 
-## For Development:
+- [localhost](http://localhost)에서 실행 결과를 확인 해보고 싶다면 실행 후
 
-* Switch to "Development" branch (git rebase -b Development)
-* Fill out .env file with your secrets
-* Make sure all auth providers are setup for http://localhost:4000
-* Start ("yarn run dev")
+    [localhost](http://localhost:5000/):5000 으로 접속
 
-## For Production:
+---
 
-* Switch to main branch (git rebase -b main)
-* Fill out .env file with your secrets
-* Make sure all auth providers are setup for your heroku app you made
+## 👉Build
+
+- 자신의 코드를 적고 나서 배포를 위한 .ts build **필수!** (ts→ js 로 변환되어 /build 폴더에 들어감)
+
+```bash
+tsc 
+```
+
+- 아무런 결과 로그가 안뜨는 것이 맞습니다. → build폴더를 확인해주세요!
+- 주기적으로 build해줍시다!
+
+---
+
+## 👉Heroku
+
+Github 자체에 연동 했기 때문에 따로 깃을 열어서 하지 않아도 됩니다. main에 push하면 바로 서버에  올라갑니다.
+**서버(main)에 올리시기 전에 branch설정을 하시거나 토의 후 올려주시길 바랍니다!** (에러나면.. 😂)
+
+1. vjsel 프로젝트로 들어가기
+2. Deploy 메뉴 선택
+3. Deployment method → **Github 선택**
+4. 맨아래 Manual deploy → DeployBranch 클릭
+    - 브런치를 나눴을 경우 브런치 선택
+5. build 성공 시 view버튼 클릭!
