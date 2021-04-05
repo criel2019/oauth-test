@@ -167,6 +167,7 @@ passport.use(new GitHubStrategy({
 
 
 
+app.use('/user', userRoutes);
 app.use(cors())
 app.get("/", (req : express.Request , res : express.Response, next : express.NextFunction) => {
     res.send("hello")
@@ -180,8 +181,6 @@ app.use((req : express.Request , res : express.Response, next : express.NextFunc
        });
 });
 
-
-app.use('/user', userRoutes);
 
 
 const port = process.env.PORT || 8081
