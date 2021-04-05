@@ -98,8 +98,8 @@ passport.use(new GoogleStrategy({
 
 
 passport.use(new NaverStrategy({
-  consumerKey: `xeiJ4Etz63ZzWGd_3ODf`,
-  consumerSecret: `i25diPbhrQ`,
+  clientID: `xeiJ4Etz63ZzWGd_3ODf`,
+  clientSecret: `i25diPbhrQ`,
   callbackURL: "/auth/naver/callback"
 },
   function (_: any, __: any, profile: any, cb: any) {
