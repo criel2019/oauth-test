@@ -1,8 +1,8 @@
 import express from 'express'
 import cors from "cors"
-import mongoose from "mongoose"
-import config from './config/config'
+import mongoose, { Error } from 'mongoose';
 import session from 'express-session';
+import dotenv from "dotenv";
 import passport from 'passport';
 import User from './models/user';
 import { IMongoDBUser } from './interfaces/user'
@@ -11,19 +11,24 @@ import userRoutes from './routes/user'
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const NaverStrategy = require('passport-naver').Strategy;
 const GitHubStrategy = require('passport-github').Strategy;
-
+dotenv.config();
 
 const app = express()
 app.use(express.json())
-mongoose
-.connect(config.mongo.url, config.mongo.options)
-.then((result) => {
-       console.log('connected')
-})
-.catch((error) => {
-       console.log(error.message)
+// mongoose
+// .connect(config.mongo.url, config.mongo.options)
+// .then((result) => {
+//        console.log('connected')
+// })
+// .catch((error) => {
+//        console.log(error.message)
+// });
+mongoose.connect(`${process.env.START_MONGODB}${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}${process.env.END_MONGODB}`, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+}, () => {
+  console.log("Connected to mongoose successfully")
 });
-
 
 
 
@@ -65,8 +70,8 @@ passport.deserializeUser((id: string, done: any) => {
 })
 
 passport.use(new GoogleStrategy({
-  clientID: `465479427588-fkdiup6o5ank9ukab68j14vqhdjsff03.apps.googleusercontent.com`,
-  clientSecret: `6AJL4-WxZdGzD30Ec-uKhsqf`,
+   clientID: `${process.env.GOOGLE_CLIENT_ID}`,
+  clientSecret: `${process.env.GOOGLE_CLIENT_SECRET}`,
   callbackURL: "/auth/google/callback"
 },
   function (_: any, __: any, profile: any, cb: any) {
