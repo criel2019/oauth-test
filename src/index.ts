@@ -35,7 +35,7 @@ mongoose.connect(`${process.env.START_MONGODB}${process.env.MONGODB_USERNAME}:${
 // Middleware changed 
 app.use(express.json());
 
-app.use(cors({ origin: "https://6065a02c87bc47f3ddd64b74--awesome-goldberg-60d50e.netlify.app", credentials: true }))
+app.use(cors({ origin: "https://606ada144dd42f00077560a8--awesome-goldberg-60d50e.netlify.app", credentials: true }))
 
 app.set("trust proxy", 1);
 

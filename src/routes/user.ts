@@ -1,6 +1,7 @@
 import express from "express";
 import controller from "../controller/user";
 import passport from 'passport';
+
 const router = express.Router();
 
 

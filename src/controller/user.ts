@@ -35,16 +35,16 @@ declare global {
 }
 
 const googleCallback = function (req, res) {
-    res.redirect('https://6065a02c87bc47f3ddd64b74--awesome-goldberg-60d50e.netlify.app');
+    res.redirect('https://606ada144dd42f00077560a8--awesome-goldberg-60d50e.netlify.app');
   }
 
   const kakaoCallback = function (req, res) {
-    res.redirect('https://6065a02c87bc47f3ddd64b74--awesome-goldberg-60d50e.netlify.app');
+    res.redirect('https://606ada144dd42f00077560a8--awesome-goldberg-60d50e.netlify.app');
   }
 
 
 const naverCallback = function (req, res) {
-    res.redirect('https://6065a02c87bc47f3ddd64b74--awesome-goldberg-60d50e.netlify.app');
+    res.redirect('https://606ada144dd42f00077560a8--awesome-goldberg-60d50e.netlify.app');
   }
 
 
