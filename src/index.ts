@@ -7,14 +7,14 @@ import passport from 'passport';
 import User from './models/user';
 import { IMongoDBUser } from './interfaces/user'
 import userRoutes from './routes/user'
-
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const NaverStrategy = require('passport-naver').Strategy;
 const GitHubStrategy = require('passport-github').Strategy;
+
 dotenv.config();
 
 const app = express()
-app.use(express.json())
+
 // mongoose
 // .connect(config.mongo.url, config.mongo.options)
 // .then((result) => {
