@@ -161,8 +161,8 @@ passport.use(new KakaoStrategy({
 ));
 
 
-app.get('user/auth/google', passport.authenticate('google', { scope: ['profile'] }));
-app.get('user/auth/google/callback',
+app.get('/user/auth/google', passport.authenticate('google', { scope: ['profile'] }));
+app.get('/user/auth/google/callback',
   passport.authenticate('google', { failureRedirect: '/login', session: true }),
   function (req, res) {
     res.redirect('https://criel-front.netlify.app');
