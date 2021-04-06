@@ -11,7 +11,7 @@ import Strategy  from './controller/user'
 dotenv.config();
 
 const app = express()
-app.use(cors({ origin: "https://606ada144dd42f00077560a8--awesome-goldberg-60d50e.netlify.app", credentials: true }))
+app.use(cors({ origin: "https://606c444912ad060007b009e5--awesome-goldberg-60d50e.netlify.app/", credentials: true }))
 
  mongoose
  .connect(config.mongo.url, config.mongo.options)
