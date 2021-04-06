@@ -178,15 +178,16 @@ app.use((req : express.Request , res : express.Response, next : express.NextFunc
 });
 
 app.get("/getuser", (req, res) => {
-  res.send(req.user);
+  console.log(req);
+  // res.send(req.user);
 })
 
-app.get("/auth/logout", (req, res) => {
-  if (req.user) {
-    req.logout();
-    res.send("done");
-  }
-})
+// app.get("/auth/logout", (req, res) => {
+//   if (req.user) {
+//     req.logout();
+//     res.send("done");
+//   }
+// })
 
 const port = process.env.PORT || 8081
 app.listen(port,()=>console.log("start"+port))
