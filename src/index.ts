@@ -29,7 +29,7 @@ const app = express()
 
 // Middleware changed 
 app.use(express.json());
-app.use(cors({ origin: "https://606c444912ad060007b009e5--awesome-goldberg-60d50e.netlify.app", credentials: true }))
+app.use(cors({ origin: "https://criel-front.netlify.app", credentials: true }))
 
 app.set("trust proxy", 1);
 

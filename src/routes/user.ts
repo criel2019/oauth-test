@@ -8,24 +8,24 @@ const router = express.Router();
   
 router.get('/auth/google', passport.authenticate('google', { scope: ['profile'] }));
 router.get('/auth/google/callback',
-  passport.authenticate('google', { failureRedirect: '/user/login', session: true }),
+  passport.authenticate('google', { failureRedirect: '/login', session: true }),
   function (req, res) {
-    res.redirect('https://606ada144dd42f00077560a8--awesome-goldberg-60d50e.netlify.app');
+    res.redirect('https://criel-front.netlify.app');
   });
   router.get('/auth/kakao', passport.authenticate('kakao'));
 
   router.get('/auth/kakao/callback',
-    passport.authenticate('kakao', { failureRedirect: '/user/login', session: true }),
+    passport.authenticate('kakao', { failureRedirect: '/login', session: true }),
     function (req, res) {
-      res.redirect('https://606ada144dd42f00077560a8--awesome-goldberg-60d50e.netlify.app');
+      res.redirect('https://criel-front.netlify.app');
     });
   
  
 router.get('/auth/naver', passport.authenticate('naver'));
 
 router.get('/auth/naver/callback',
-  passport.authenticate('github', { failureRedirect: '/user/login', session: true }),
+  passport.authenticate('naver', { failureRedirect: '/login', session: true }),
   function (req, res) {
-    res.redirect('https://606ada144dd42f00077560a8--awesome-goldberg-60d50e.netlify.app');
+    res.redirect('https://criel-front.netlify.app');
   });
 export = router;
