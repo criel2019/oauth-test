@@ -5,12 +5,13 @@ import dotenv from "dotenv";
 import config from './config/config'
 import userRoutes from './routes/user'
 import session from 'express-session'
-import passport, { deserializeUser, serializeUser } from 'passport'
+import passport from 'passport'
 import Strategy  from './controller/user'
 
 dotenv.config();
 
 const app = express()
+app.use(cors({ origin: "https://606ada144dd42f00077560a8--awesome-goldberg-60d50e.netlify.app", credentials: true }))
 
  mongoose
  .connect(config.mongo.url, config.mongo.options)
@@ -45,7 +46,7 @@ app.use(passport.session());
 Strategy;
 
 app.use('/user', userRoutes);
-app.use(cors())
+
 app.get("/", (req : express.Request , res : express.Response, next : express.NextFunction) => {
     res.send("hello")
 })
