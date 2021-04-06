@@ -168,7 +168,16 @@ app.get("/", (req : express.Request , res : express.Response, next : express.Nex
     res.send("hello")
 })
 
+app.get("/user/getuser", (req, res) => {
+  res.send(req.user);
+})
 
+app.get("/user/auth/logout", (req, res) => {
+  if (req.user) {
+    req.logout();
+    res.send("done");
+  }
+})
 app.use((req : express.Request , res : express.Response, next : express.NextFunction) => {
        const error = new Error('Not Found');
        res.status(404).json({

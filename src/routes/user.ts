@@ -33,7 +33,7 @@ router.get('/auth/google/callback',
 router.get('/auth/naver', passport.authenticate('naver'));
 
 router.get('/auth/naver/callback',
-  passport.authenticate('github', { failureRedirect: '/login', session: true }),
+  passport.authenticate('github', { failureRedirect: '/user/login', session: true }),
   function (req, res) {
     res.redirect('https://606ada144dd42f00077560a8--awesome-goldberg-60d50e.netlify.app');
   });
