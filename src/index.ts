@@ -7,7 +7,7 @@ import userRoutes from './routes/user'
 import session from 'express-session'
 import passport from 'passport';
 import User from './models/user';
-import { IMongoDBUser } from "src/interfaces/user";
+import { IMongoDBUser } from "./interfaces/user";
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const NaverStrategy = require('passport-naver').Strategy;
 const KakaoStrategy = require('passport-kakao').Strategy;
@@ -177,7 +177,16 @@ app.use((req : express.Request , res : express.Response, next : express.NextFunc
        });
 });
 
+app.get("/getuser", (req, res) => {
+  res.send(req.user);
+})
 
+app.get("/auth/logout", (req, res) => {
+  if (req.user) {
+    req.logout();
+    res.send("done");
+  }
+})
 
 const port = process.env.PORT || 8081
 app.listen(port,()=>console.log("start"+port))

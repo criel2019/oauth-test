@@ -28,15 +28,4 @@ router.get('/auth/naver/callback',
   function (req, res) {
     res.redirect('https://606ada144dd42f00077560a8--awesome-goldberg-60d50e.netlify.app');
   });
-  router.get("/getuser", (req, res) => {
-    res.send(req.user);
-  })
-  
-  router.get("/auth/logout", (req, res) => {
-    if (req.user) {
-      req.logout();
-      res.send("done");
-    }
-  })
-
 export = router;
