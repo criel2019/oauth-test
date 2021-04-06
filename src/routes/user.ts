@@ -4,16 +4,7 @@ import passport from 'passport';
 const router = express.Router();
 
 
-  router.get("/getuser", (req, res) => {
-    res.send(req.user);
-  })
-  
-  router.get("/auth/logout", (req, res) => {
-    if (req.user) {
-      req.logout();
-      res.send("done");
-    }
-  })
+
   
 router.get('/auth/google', passport.authenticate('google', { scope: ['profile'] }));
 router.get('/auth/google/callback',
@@ -37,5 +28,15 @@ router.get('/auth/naver/callback',
   function (req, res) {
     res.redirect('https://606ada144dd42f00077560a8--awesome-goldberg-60d50e.netlify.app');
   });
+  router.get("/getuser", (req, res) => {
+    res.send(req.user);
+  })
+  
+  router.get("/auth/logout", (req, res) => {
+    if (req.user) {
+      req.logout();
+      res.send("done");
+    }
+  })
 
 export = router;

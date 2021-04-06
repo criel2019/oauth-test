@@ -5,7 +5,7 @@ import dotenv from "dotenv";
 import config from './config/config'
 import userRoutes from './routes/user'
 import session from 'express-session'
-import passport, { serializeUser, Strategy } from 'passport';
+import passport from 'passport';
 import User from './models/user';
 import { IMongoDBUser } from "src/interfaces/user";
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
@@ -15,7 +15,6 @@ const KakaoStrategy = require('passport-kakao').Strategy;
 dotenv.config();
 
 const app = express()
-app.use(cors({ origin: "https://606c444912ad060007b009e5--awesome-goldberg-60d50e.netlify.app", credentials: true }))
 
  mongoose
  .connect(config.mongo.url, config.mongo.options)
@@ -30,6 +29,8 @@ app.use(cors({ origin: "https://606c444912ad060007b009e5--awesome-goldberg-60d50
 
 // Middleware changed 
 app.use(express.json());
+app.use(cors({ origin: "https://606c444912ad060007b009e5--awesome-goldberg-60d50e.netlify.app", credentials: true }))
+
 app.set("trust proxy", 1);
 
 app.use(
@@ -168,16 +169,7 @@ app.get("/", (req : express.Request , res : express.Response, next : express.Nex
     res.send("hello")
 })
 
-app.get("/user/getuser", (req, res) => {
-  res.send(req.user);
-})
 
-app.get("/user/auth/logout", (req, res) => {
-  if (req.user) {
-    req.logout();
-    res.send("done");
-  }
-})
 app.use((req : express.Request , res : express.Response, next : express.NextFunction) => {
        const error = new Error('Not Found');
        res.status(404).json({
