@@ -161,9 +161,30 @@ passport.use(new KakaoStrategy({
 ));
 
 
+app.get('user/auth/google', passport.authenticate('google', { scope: ['profile'] }));
+app.get('user/auth/google/callback',
+  passport.authenticate('google', { failureRedirect: '/login', session: true }),
+  function (req, res) {
+    res.redirect('https://criel-front.netlify.app');
+  });
+  app.get('/auth/kakao', passport.authenticate('kakao'));
+
+  app.get('/auth/kakao/callback',
+    passport.authenticate('kakao', { failureRedirect: '/login', session: true }),
+    function (req, res) {
+      res.redirect('https://criel-front.netlify.app');
+    });
+  
+ 
+app.get('/auth/naver', passport.authenticate('naver'));
+
+app.get('/auth/naver/callback',
+  passport.authenticate('naver', { failureRedirect: '/login', session: true }),
+  function (req, res) {
+    res.redirect('https://criel-front.netlify.app');
+  });
 
 
-app.use('/user', userRoutes);
 
 app.get("/", (req : express.Request , res : express.Response, next : express.NextFunction) => {
     res.send("hello")
@@ -178,16 +199,15 @@ app.use((req : express.Request , res : express.Response, next : express.NextFunc
 });
 
 app.get("/getuser", (req, res) => {
-  console.log(req);
-  // res.send(req.user);
+  res.send(req.user);
 })
 
-// app.get("/auth/logout", (req, res) => {
-//   if (req.user) {
-//     req.logout();
-//     res.send("done");
-//   }
-// })
+app.get("/auth/logout", (req, res) => {
+  if (req.user) {
+    req.logout();
+    res.send("done");
+  }
+})
 
 const port = process.env.PORT || 8081
 app.listen(port,()=>console.log("start"+port))
