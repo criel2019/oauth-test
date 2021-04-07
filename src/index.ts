@@ -191,12 +191,12 @@ app.get("/", (req : express.Request , res : express.Response, next : express.Nex
 })
 
 
-app.use((req : express.Request , res : express.Response, next : express.NextFunction) => {
-       const error = new Error('Not Found');
-       res.status(404).json({
-              message : error.message
-       });
-});
+// app.use((req : express.Request , res : express.Response, next : express.NextFunction) => {
+//        const error = new Error('Not Found');
+//        res.status(404).json({
+//               message : error.message
+//        });
+// });
 
 app.get("/getuser", (req, res) => {
    res.send(req.user);
