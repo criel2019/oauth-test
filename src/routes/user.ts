@@ -1,7 +1,7 @@
 import express from "express";
 import passport from 'passport';
 
-import session from 'express-session'
+
 
 
 
@@ -10,25 +10,6 @@ const router = express.Router();
 
 
 // Middleware changed  
-router.use(express.json());
-
-
-
-
-router.use(
-  session({
-    secret: "secretcode",
-    resave: true,
-    saveUninitialized: true,
-    cookie: {
-      sameSite: "none",
-      secure: true,
-      maxAge: 1000 * 60 * 60 * 24 * 7 // One Week
-    }
-  }))
-router.use(express.urlencoded({ extended: false }));
-router.use(passport.initialize());
-router.use(passport.session());
 
 
 

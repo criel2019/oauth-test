@@ -17,10 +17,15 @@ dotenv.config();
 
 const app = express()
 app.set("trust proxy", 1);
-mongoose.connect(config.mongo.url, config.mongo.options,  
-  () => {console.log("Connected to mongoose successfully")
-});
-
+mongoose
+.connect(config.mongo.url, config.mongo.options)
+.then((result) => {
+       // console.log(result)
+       console.log('connected')
+})
+.catch((error) => {
+       console.log(error.message)
+})
 app.use(cors({ origin: "https://criel-front.netlify.app", credentials: true }))
 
 
@@ -164,12 +169,12 @@ app.get("/", (req : express.Request , res : express.Response, next : express.Nex
 })
 
 
-// app.use((req : express.Request , res : express.Response, next : express.NextFunction) => {
-//        const error = new Error('Not Found');
-//        res.status(404).json({
-//               message : error.message
-//        });
-// });
+app.use((req : express.Request , res : express.Response, next : express.NextFunction) => {
+       const error = new Error('Not Found');
+        res.status(404).json({
+              message : error.message
+        });
+ });
 app.use("/user", userRoutes)
 
 const port = process.env.PORT || 8081
