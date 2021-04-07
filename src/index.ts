@@ -12,12 +12,16 @@ const app = express()
 app.use(express.json());
 
 app.set("trust proxy", 1);
-mongoose.connect(`${process.env.START_MONGODB}${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}${process.env.END_MONGODB}`, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-}, () => {
-  console.log("Connected to mongoose successfully")
-});
+mongoose
+.connect(config.mongo.url, config.mongo.options)
+.then((result) => {
+       // console.log(result)
+       console.log('connected')
+})
+.catch((error) => {
+       console.log(error.message)
+})
+
 
 app.use(cors({ origin: "https://criel-front.netlify.app", credentials: true }))
 
@@ -35,8 +39,8 @@ app.use(
   }))
 
 
-var passport = require('./controller/user')(app,mongoose);
-var userRoutes = require('./routes/user')(passport);
+var passport = require('./controller/user')(app)
+var userRoutes = require('./routes/user')(passport)
 app.get("/", (req : express.Request , res : express.Response, next : express.NextFunction) => {
     res.send("hello")
 })

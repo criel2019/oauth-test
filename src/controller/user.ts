@@ -5,7 +5,7 @@ const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const NaverStrategy = require('passport-naver').Strategy;
 const KakaoStrategy = require('passport-kakao').Strategy;
 
-module.exports = function (app,moongoose) {
+module.exports = function (app) {
 
   app.use(passport.initialize());
   app.use(passport.session());
