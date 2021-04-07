@@ -47,18 +47,19 @@ app.use(passport.session());
 
 
 
+
 passport.serializeUser((user: IMongoDBUser, done: any) => {
-  console.log('serializeUser',user)
   return done(null, user._id);
 });
 
 passport.deserializeUser((id: string, done: any) => {
-  console.log('deserializeUser',id)
+
   User.findById(id, (err: Error, doc: IMongoDBUser) => {
     // Whatever we return goes to the client and binds to the req.user property
     return done(null, doc);
   })
 })
+
 
 passport.use(new GoogleStrategy({
   clientID: `${process.env.GOOGLE_CLIENT_ID}`,
