@@ -40,7 +40,7 @@ passport.deserializeUser((id: string, done: any) => {
 passport.use(new GoogleStrategy({
   clientID: `${process.env.GOOGLE_CLIENT_ID}`,
   clientSecret: `${process.env.GOOGLE_CLIENT_SECRET}`,
-  callbackURL: "/auth/google/callback"
+  callbackURL: "/user/auth/google/callback"
 },
 
  function (_: any, __: any, profile: any, cb: any) {
@@ -78,7 +78,7 @@ passport.use(new GoogleStrategy({
  passport.use(new NaverStrategy({
   clientID: `xeiJ4Etz63ZzWGd_3ODf`,
   clientSecret: `i25diPbhrQ`,
-  callbackURL: "/auth/naver/callback"
+  callbackURL: "/user/auth/naver/callback"
 },
   function (_: any, __: any, profile: any, cb: any) {
 
