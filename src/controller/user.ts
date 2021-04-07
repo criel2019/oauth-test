@@ -1,6 +1,7 @@
 import User from '../models/user';
 import { IMongoDBUser } from "../interfaces/user";
 import passport from 'passport';
+
 module.exports = function(app){
 
 
@@ -120,5 +121,5 @@ passport.use(new KakaoStrategy({
 
   }
 ));
-return passport
+return passport;
 }
