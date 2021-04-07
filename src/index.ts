@@ -74,7 +74,7 @@ passport.use(new GoogleStrategy({
 },
 
  function (_: any, __: any, profile: any, cb: any) {
-
+  console.log('FindOne', profile.id)  
     User.findOne({ googleId: profile.id }, async (err: Error, doc: IMongoDBUser) => {
 
       if (err) {
