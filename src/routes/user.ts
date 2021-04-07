@@ -153,14 +153,14 @@ passport.use(new KakaoStrategy({
 
 router.get('/auth/google', passport.authenticate('google', { scope: ['profile'] }));
 router.get('/auth/google/callback',
-  passport.authenticate('google', { failureRedirect: '/login', session: true }),
+  passport.authenticate('google', { failureRedirect: '/user/login', session: true }),
   function (req, res) {
     res.redirect('https://criel-front.netlify.app');
   });
   router.get('/auth/kakao', passport.authenticate('kakao'));
 
   router.get('/auth/kakao/callback',
-    passport.authenticate('kakao', { failureRedirect: '/login', session: true }),
+    passport.authenticate('kakao', { failureRedirect: '/user/login', session: true }),
     function (req, res) {
       res.redirect('https://criel-front.netlify.app');
     });
@@ -169,7 +169,7 @@ router.get('/auth/google/callback',
 router.get('/auth/naver', passport.authenticate('naver'));
 
 router.get('/auth/naver/callback',
-  passport.authenticate('naver', { failureRedirect: '/login', session: true }),
+  passport.authenticate('naver', { failureRedirect: '/user/login', session: true }),
   function (req, res) {
     res.redirect('https://criel-front.netlify.app');
   });
