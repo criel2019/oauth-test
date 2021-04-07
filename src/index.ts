@@ -3,7 +3,7 @@ import mongoose, { Error } from 'mongoose';
 import dotenv from "dotenv";
 import config from './config/config'
 import userRoutes from './routes/user'
-
+import cors from "cors"
 
 
 dotenv.config();
@@ -14,7 +14,7 @@ mongoose.connect(config.mongo.url, config.mongo.options,
   () => {console.log("Connected to mongoose successfully")
 });
 
-
+app.use(cors({ origin: "https://criel-front.netlify.app", credentials: true }))
 
 
 app.get("/", (req : express.Request , res : express.Response, next : express.NextFunction) => {
