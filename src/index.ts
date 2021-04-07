@@ -17,12 +17,15 @@ dotenv.config();
 
 const app = express()
 app.set("trust proxy", 1);
-mongoose.connect(`${process.env.START_MONGODB}${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}${process.env.END_MONGODB}`, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-}, () => {
-  console.log("Connected to mongoose successfully")
-});
+mongoose
+.connect(config.mongo.url, config.mongo.options)
+.then((result) => {
+       // console.log(result)
+       console.log('connected')
+})
+.catch((error) => {
+       console.log(error.message)
+})
 app.use(cors({ origin: "https://criel-front.netlify.app", credentials: true }))
 
 
@@ -65,8 +68,8 @@ passport.deserializeUser((id: string, done: any) => {
 
 
 passport.use(new GoogleStrategy({
-  clientID: "465479427588-9hstr85dhd47fsbre8tqgcn8gap5jaku.apps.googleusercontent.com",
-  clientSecret: "UVo0g0C8BB5abCrYS0krh-Yd",
+  clientID: `${process.env.GOOGLE_CLIENT_ID}`,
+  clientSecret: `${process.env.GOOGLE_CLIENT_SECRET}`,
   callbackURL: "/user/auth/google/callback"
 },
 
