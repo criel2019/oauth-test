@@ -11,6 +11,8 @@ import session from 'express-session'
 dotenv.config();
 
 const app = express()
+app.use(express.json());
+
 app.set("trust proxy", 1);
 mongoose
 .connect(config.mongo.url, config.mongo.options)
@@ -23,7 +25,6 @@ mongoose
 })
 app.use(cors({ origin: "https://criel-front.netlify.app", credentials: true }))
 
-app.use(express.json());
 
 app.use(
   session({ 
@@ -38,9 +39,8 @@ app.use(
   }))
 
 
-var passport = require('./controller/user')(app)
-var userRoutes = require('./routes/user')(passport)
-
+var passport = require('./controller/user')(app);
+var userRoutes = require('./routes/user')(passport);
 app.get("/", (req : express.Request , res : express.Response, next : express.NextFunction) => {
     res.send("hello")
 })
