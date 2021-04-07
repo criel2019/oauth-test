@@ -2,11 +2,11 @@ import express from 'express'
 import mongoose, { Error } from 'mongoose';
 import dotenv from "dotenv";
 import config from './config/config'
-import userRoutes from './routes/user'
+
 import cors from "cors"
 
 import session from 'express-session'
-
+import passport from 'passport';
 
 
 
@@ -41,6 +41,7 @@ app.use(
 
 
 require('./controller/user')(app)
+var userRoutes = require('./routes/user')(passport)
 
 app.get("/", (req : express.Request , res : express.Response, next : express.NextFunction) => {
     res.send("hello")
