@@ -7,6 +7,7 @@ import cors from "cors"
 import User from './models/user';
 import { IMongoDBUser } from "./interfaces/user";
 import passport from 'passport';
+import session from 'express-session'
 
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const NaverStrategy = require('passport-naver').Strategy;
@@ -21,6 +22,30 @@ mongoose.connect(config.mongo.url, config.mongo.options,
 });
 
 app.use(cors({ origin: "https://criel-front.netlify.app", credentials: true }))
+
+
+
+
+
+app.use(express.json());
+
+
+
+
+app.use(
+  session({
+    secret: "secretcode",
+    resave: true,
+    saveUninitialized: true,
+    cookie: {
+      sameSite: "none",
+      secure: true,
+      maxAge: 1000 * 60 * 60 * 24 * 7 // One Week
+    }
+  }))
+app.use(express.urlencoded({ extended: false }));
+app.use(passport.initialize());
+app.use(passport.session());
 
 
 passport.serializeUser((user: IMongoDBUser, done: any) => {
