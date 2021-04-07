@@ -200,7 +200,7 @@ app.use((req : express.Request , res : express.Response, next : express.NextFunc
 });
 
 app.get("/getuser", (req, res) => {
-  console.log('getuser',req.user)
+  console.log('getuser',req)
   // res.send(req.user);
 })
 
