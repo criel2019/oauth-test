@@ -201,14 +201,14 @@ app.use((req : express.Request , res : express.Response, next : express.NextFunc
 
 app.get("/getuser", (req, res) => {
   console.log('getuser',req.user)
-  res.send(req.user);
+  // res.send(req.user);
 })
 
 app.get("/auth/logout", (req, res) => {
-  if (req.user) {
-    req.logout();
-    res.send("done");
-  }
+  // if (req.user) {
+  //   req.logout();
+  //   res.send("done");
+  // }
 })
 
 const port = process.env.PORT || 8081
