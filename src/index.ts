@@ -6,8 +6,6 @@ import cors from "cors"
 import session from 'express-session'
 
 
-
-
 dotenv.config();
 
 const app = express()

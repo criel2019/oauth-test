@@ -1,14 +1,12 @@
 import User from '../models/user';
 import { IMongoDBUser } from "../interfaces/user";
 import passport from 'passport';
-
-module.exports = function(app){
-
-
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const NaverStrategy = require('passport-naver').Strategy;
 const KakaoStrategy = require('passport-kakao').Strategy;
 
+module.exports = function(app){
+  
 app.use(passport.initialize());
 app.use(passport.session());
 passport.serializeUser((user: IMongoDBUser, done: any) => {
