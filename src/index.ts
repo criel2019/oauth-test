@@ -10,11 +10,8 @@ dotenv.config();
 
 const app = express()
 app.set("trust proxy", 1);
-mongoose.connect(`${process.env.START_MONGODB}${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}${process.env.END_MONGODB}`, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-}, () => {
-  console.log("Connected to mongoose successfully")
+mongoose.connect(config.mongo.url, config.mongo.options,  
+  () => {console.log("Connected to mongoose successfully")
 });
 
 
@@ -31,17 +28,7 @@ app.get("/", (req : express.Request , res : express.Response, next : express.Nex
 //               message : error.message
 //        });
 // });
-
-app.get("/getuser", (req, res) => {
-   res.send(req.user);
-})
-
-app.get("/auth/logout", (req, res) => {
-  // if (req.user) {
-     req.logout();
-     res.send("done");
-   }
-)
+app.get("/user", userRoutes)
 
 const port = process.env.PORT || 8081
 app.listen(port,()=>console.log("start"+port))

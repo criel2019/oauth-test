@@ -174,5 +174,15 @@ router.get('/auth/naver/callback',
     res.redirect('https://criel-front.netlify.app');
   });
 
+router.get("/getuser", (req, res) => {
+    res.send(req.user);
+ })
+ 
+ router.get("/auth/logout", (req, res) => {
+   // if (req.user) {
+      req.logout();
+      res.send("done");
+    }
+ )
 
 export = router;
