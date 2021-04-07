@@ -49,11 +49,12 @@ app.use(passport.session());
 
 
 passport.serializeUser((user: IMongoDBUser, done: any) => {
+  console.log('serializeUser', user)  
   return done(null, user._id);
 });
 
 passport.deserializeUser((id: string, done: any) => {
-
+  console.log('deserializeUser', id)  
   User.findById(id, (err: Error, doc: IMongoDBUser) => {
     // Whatever we return goes to the client and binds to the req.user property
     return done(null, doc);
@@ -198,7 +199,6 @@ app.use((req : express.Request , res : express.Response, next : express.NextFunc
 });
 
 app.get("/getuser", (req, res) => {
-  console.log('getuser',req)
    res.send(req.user);
 })
 
