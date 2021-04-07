@@ -51,11 +51,12 @@ app.use(passport.session());
 
 
 passport.serializeUser((user: IMongoDBUser, done: any) => {
+  console.log('serializeUser',user)
   return done(null, user._id);
 });
 
 passport.deserializeUser((id: string, done: any) => {
-
+  console.log('deserializeUser',id)
   User.findById(id, (err: Error, doc: IMongoDBUser) => {
     // Whatever we return goes to the client and binds to the req.user property
     return done(null, doc);
@@ -65,7 +66,7 @@ passport.deserializeUser((id: string, done: any) => {
 passport.use(new GoogleStrategy({
   clientID: `${process.env.GOOGLE_CLIENT_ID}`,
   clientSecret: `${process.env.GOOGLE_CLIENT_SECRET}`,
-  callbackURL: "/user/auth/google/callback"
+  callbackURL: "/auth/google/callback"
 },
 
  function (_: any, __: any, profile: any, cb: any) {
@@ -103,7 +104,7 @@ passport.use(new GoogleStrategy({
  passport.use(new NaverStrategy({
   clientID: `xeiJ4Etz63ZzWGd_3ODf`,
   clientSecret: `i25diPbhrQ`,
-  callbackURL: "/user/auth/naver/callback"
+  callbackURL: "/auth/naver/callback"
 },
   function (_: any, __: any, profile: any, cb: any) {
 
@@ -135,7 +136,7 @@ passport.use(new GoogleStrategy({
 passport.use(new KakaoStrategy({
   clientID: `${process.env.Kakao_CLIENT_ID}`,
   clientSecret: `${process.env.Kakao_CLIENT_SECRET}`,
-  callbackURL: "/user/auth/kakao/callback"
+  callbackURL: "/auth/kakao/callback"
 },
   function (_: any, __: any, profile: any, cb: any) {
 
@@ -161,8 +162,8 @@ passport.use(new KakaoStrategy({
 ));
 
 
-app.get('/user/auth/google', passport.authenticate('google', { scope: ['profile'] }));
-app.get('/user/auth/google/callback',
+app.get('/auth/google', passport.authenticate('google', { scope: ['profile'] }));
+app.get('/auth/google/callback',
   passport.authenticate('google', { failureRedirect: '/login', session: true }),
   function (req, res) {
     res.redirect('https://criel-front.netlify.app');
@@ -199,6 +200,7 @@ app.use((req : express.Request , res : express.Response, next : express.NextFunc
 });
 
 app.get("/getuser", (req, res) => {
+  console.log('getuser',req.user)
   res.send(req.user);
 })
 
