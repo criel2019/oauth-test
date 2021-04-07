@@ -37,7 +37,7 @@ app.use(
   }))
 
 
-var passport = require('./controller/user')(app);
+var passport = require('./controller/user')(app,mongoose);
 var userRoutes = require('./routes/user')(passport);
 app.get("/", (req : express.Request , res : express.Response, next : express.NextFunction) => {
     res.send("hello")
