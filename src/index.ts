@@ -17,15 +17,12 @@ dotenv.config();
 
 const app = express()
 app.set("trust proxy", 1);
-mongoose
-.connect(config.mongo.url, config.mongo.options)
-.then((result) => {
-       // console.log(result)
-       console.log('connected')
-})
-.catch((error) => {
-       console.log(error.message)
-})
+mongoose.connect(`${process.env.START_MONGODB}${process.env.MONGODB_USERNAME}:${process.env.MONGODB_PASSWORD}${process.env.END_MONGODB}`, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+}, () => {
+  console.log("Connected to mongoose successfully")
+});
 app.use(cors({ origin: "https://criel-front.netlify.app", credentials: true }))
 
 
