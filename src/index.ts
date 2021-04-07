@@ -68,13 +68,12 @@ passport.deserializeUser((id: string, done: any) => {
 
 
 passport.use(new GoogleStrategy({
-  clientID: `${process.env.GOOGLE_CLIENT_ID}`,
-  clientSecret: `${process.env.GOOGLE_CLIENT_SECRET}`,
+  clientID: "465479427588-9hstr85dhd47fsbre8tqgcn8gap5jaku.apps.googleusercontent.com",
+  clientSecret: "UVo0g0C8BB5abCrYS0krh-Yd",
   callbackURL: "/user/auth/google/callback"
 },
 
  function (_: any, __: any, profile: any, cb: any) {
-  console.log('FindOne', profile.id)  
     User.findOne({ googleId: profile.id }, async (err: Error, doc: IMongoDBUser) => {
 
       if (err) {
