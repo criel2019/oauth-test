@@ -56,7 +56,33 @@ module.exports = function (app) {
 
 
 
-
+    passport.use(new KakaoStrategy({
+      clientID: `${process.env.Kakao_CLIENT_ID}`,
+      clientSecret: `${process.env.Kakao_CLIENT_SECRET}`,
+      callbackURL: "/user/auth/kakao/callback"
+    },
+      function (_: any, __: any, profile: any, cb: any) {
+  
+        User.findOne({ kakaoId: profile.id }, async (err: Error, doc: IMongoDBUser) => {
+  
+          if (err) {
+            return cb(err, null);
+          }
+  
+          if (!doc) {
+            const newUser = new User({
+              kakaoId: profile.id,
+              username: profile.username
+            });
+  
+            await newUser.save();
+            cb(null, newUser);
+          }
+          cb(null, doc);
+        })
+  
+      }
+    ));
 
 
 
@@ -88,37 +114,6 @@ module.exports = function (app) {
     }
   ));
 
-
-
-
-
-  passport.use(new KakaoStrategy({
-    clientID: `${process.env.Kakao_CLIENT_ID}`,
-    clientSecret: `${process.env.Kakao_CLIENT_SECRET}`,
-    callbackURL: "/auth/kakao/callback"
-  },
-    function (_: any, __: any, profile: any, cb: any) {
-
-      User.findOne({ kakaoId: profile.id }, async (err: Error, doc: IMongoDBUser) => {
-
-        if (err) {
-          return cb(err, null);
-        }
-
-        if (!doc) {
-          const newUser = new User({
-            kakaoId: profile.id,
-            username: profile.username
-          });
-
-          await newUser.save();
-          cb(null, newUser);
-        }
-        cb(null, doc);
-      })
-
-    }
-  ));
 
   return passport;
 }

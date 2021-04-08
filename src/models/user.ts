@@ -54,11 +54,11 @@ const user = new mongoose.Schema({
         required: false,
         type: String
     },
-    twitterId: {
+    kakaoId: {
         required: false,
         type: String
     },
-    githubId: {
+    naverId: {
         required: false,
         type: String
     },
