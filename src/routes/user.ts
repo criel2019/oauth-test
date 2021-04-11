@@ -8,14 +8,14 @@ module.exports = function (passport) {
   router.get('/auth/google/callback',
     passport.authenticate('google', { failureRedirect: '/user/login', session: true }),
     function (req, res) {
-      res.redirect('https://frontend-edh8r7th8-advi22.vercel.app/testpage');
+      res.redirect('https://frontend-git-ympark-advi22.vercel.app/testpage');
     });
   router.get('/auth/kakao', passport.authenticate('kakao'));
 
   router.get('/auth/kakao/callback',
     passport.authenticate('kakao', { failureRedirect: '/user/login', session: true }),
     function (req, res) {
-      res.redirect('https://frontend-edh8r7th8-advi22.vercel.app/testpage');
+      res.redirect('https://frontend-git-ympark-advi22.vercel.app/testpage');
     });
 
 
@@ -24,7 +24,7 @@ module.exports = function (passport) {
   router.get('/auth/naver/callback',
     passport.authenticate('naver', { failureRedirect: '/user/login', session: true }),
     function (req, res) {
-      res.redirect('https://frontend-edh8r7th8-advi22.vercel.app/testpage');
+      res.redirect('https://frontend-git-ympark-advi22.vercel.app/testpage');
     });
 
   router.get("/getuser", (req, res) => {
