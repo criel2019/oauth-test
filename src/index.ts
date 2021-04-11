@@ -23,7 +23,7 @@ mongoose
 })
 
 
-app.use(cors({ origin: "https://criel-front.netlify.app", credentials: true }))
+app.use(cors({ origin: "https://frontend-git-develop-advi22.vercel.app", credentials: true }))
 
 
 app.use(
